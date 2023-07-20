@@ -1,10 +1,11 @@
 import logo from './logo.svg';
 import './App.css';
 import {BrowserRouter,Route,Routes} from "react-router-dom";
-import EmpListing from "./EmpListing";
-import EmpCreate from './EmpCreate';
-import EmpDetail from './EmpDetail';
-import EmpEdit from './EmpEdit';
+import ProductListing from "./ProductListing";
+import ProductCreate from './ProductCreate';
+import ProductDetail from './ProductDetail';
+import ProductEdit from './ProductEdit';
+import ProductSearch from './ProductSearch';
 
 function App() {
   return (
@@ -12,11 +13,12 @@ function App() {
       <h1>React JS CRUDS Operations</h1>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<EmpListing />}></Route>
-          <Route path="/employee/create" element={<EmpCreate />}></Route>
+          <Route path="/" element={<ProductListing />}></Route>
+          <Route path="/cruds-project/create" element={<ProductCreate />}></Route>
 
-          <Route path="/employee/detail/:empid" element={<EmpDetail />}></Route>
-          <Route path="/employee/edit/:empid" element={<EmpEdit />}></Route>
+          <Route path="/cruds-project/detail/:prodid" element={<ProductDetail />}></Route>
+          <Route path="/cruds-project/edit/:prodid" element={<ProductEdit />}></Route>
+          <Route path="/cruds-project/search" element={<ProductSearch />} />
         </Routes>
       </BrowserRouter>
     </div>

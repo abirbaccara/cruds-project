@@ -1,12 +1,30 @@
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 
-const EmpCreate = () => {
+const ProductEdit = () => {
+
+    const { prodid } = useParams();
+
+    // const [prodata, prodatachange] = useState({});
+
+    useEffect(() => {
+        fetch("http://localhost:8000/cruds-project/" + prodid).then((res) => {
+            return res.json();
+        }).then((resp) => {
+            idchange(resp.id);
+            titlechange(resp.title);
+            pricechange(resp.price);
+            quantitychange(resp.quantity);
+            activechange(resp.active);
+        }).catch((err) => {
+            console.log(err.message);
+        })
+    }, []);
 
     const[id, idchange]=useState("");
-    const[name, namechange]=useState("");
-    const[email, emailchange]=useState("");
-    const[phone, phonechange]=useState("");
+    const[title, titlechange]=useState("");
+    const[price, pricechange]=useState("");
+    const[quantity, quantitychange]=useState("");
     const[active, activechange]=useState(true);
     const[validation, valchange]=useState(false);
 
@@ -16,13 +34,13 @@ const EmpCreate = () => {
     const handlesubmit = (e) => {
         e.preventDefault();
 
-        const empdata={name, email, phone, active};
+        const prodata={id, title, price, quantity, active};
 
-        fetch("http://localhost:8000/employee", {
+        fetch("http://localhost:8000/cruds-project/" + prodid, {
 
-            method: "POST",
+            method: "PUT",
             headers: {"content-type" : "application/json"},
-            body: JSON.stringify(empdata),
+            body: JSON.stringify(prodata),
         }).then((res) => {
             alert("Saved Successfully.")
             navigate("/");
@@ -38,7 +56,7 @@ const EmpCreate = () => {
                     <form className="container" onSubmit={handlesubmit}>
                         <div className="card" style={{"textAlign" : "left"}}>
                             <div className="card-title">
-                                <h2>Employee Create</h2>
+                                <h2>Modification Du Produit</h2>
                             </div>
                             <div className="card-body">
                                 <div className="row">
@@ -49,33 +67,33 @@ const EmpCreate = () => {
                                         </div>
                                         <div className="col-lg-12">
                                             <div className="from-group">
-                                                <label>Name</label>
-                                                <input required value={name} onMouseDown={e=>valchange(true)} onChange={e=>namechange(e.target.value)} className="form-control"></input>
-                                            {name.length==0 && validation && <span className="text-danger">Enter the Name</span>}
+                                                <label>Titre</label>
+                                                <input required value={title} onMouseDown={e=>valchange(true)} onChange={e=>titlechange(e.target.value)} className="form-control"></input>
+                                            {title.length==0 && validation && <span className="text-danger">Entrez Le Titre</span>}
                                             </div>
                                         </div>
                                         <div className="col-lg-12">
                                             <div className="from-group">
-                                                <label>Email</label>
-                                                <input value={email} onChange={e=>emailchange(e.target.value)} className="form-control"></input>
+                                                <label>Prix</label>
+                                                <input value={price} onChange={e=>pricechange(e.target.value)} className="form-control"></input>
                                             </div>
                                         </div>
                                         <div className="col-lg-12">
                                             <div className="from-group">
-                                                <label>Phone</label>
-                                                <input value={phone} onChange={e=>phonechange(e.target.value)} className="form-control"></input>
+                                                <label>Quantité</label>
+                                                <input value={quantity} onChange={e=>quantitychange(e.target.value)} className="form-control"></input>
                                             </div>
                                         </div>
                                         <div className="col-lg-12">                                    <div className="col-lg-12">
                                             <div className="form-check">
                                             <input type="checkbox" className="form-check-input"></input>
-                                                <label checked={active} onChange={e=>activechange(e.target.value)} className="form-check-label">Is Active</label>
+                                                <label checked={active} onChange={e=>activechange(e.target.value)} className="form-check-label">Actif</label>
                                             </div>
                                         </div>
                                         <div className="col-lg-12">
                                             <div className="form-group">
-                                                <button type="submit" className="btn btn-success">Save</button>
-                                                <Link to="/" className="btn btn-danger">Back</Link>
+                                                <button type="submit" className="btn btn-success">Sauvegarder</button>
+                                                <Link to="/" className="btn btn-danger">Retour</Link>
                                             </div>
                                         </div>
                                     </div>
@@ -90,4 +108,4 @@ const EmpCreate = () => {
     )
 }
 
-export default EmpCreate;
+export default ProductEdit;

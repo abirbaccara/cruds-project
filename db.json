@@ -1,24 +1,39 @@
 {
-  "employee": [
+  "cruds-project": [
     {
       "id": 1,
-      "name": "Jhon",
-      "email": "jhon@email.com",
-      "phone": "01234567890"
+      "title": "Book",
+      "price": "56",
+      "quantity": "2",
+      "active": true
     },
     {
-      "name": "Nick",
-      "email": "nick@email.com",
-      "phone": "9876543210",
+      "title": "Phone",
+      "price": "1000",
+      "quantity": "1",
       "active": true,
       "id": 2
     },
     {
-      "name": "Zack",
-      "email": "zack@email.com",
-      "phone": "3456789120",
+      "title": "Headphones",
+      "price": "120",
+      "quantity": "2",
       "active": true,
       "id": 3
+    },
+    {
+      "title": "Pen",
+      "price": "0.7",
+      "quantity": "4",
+      "active": true,
+      "id": 4
+    },
+    {
+      "title": "PC",
+      "price": "2000",
+      "quantity": "2",
+      "active": true,
+      "id": 5
     }
   ]
 }
